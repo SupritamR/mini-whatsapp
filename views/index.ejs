@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini WhatsApp</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <main class="page-shell chat-list-page">
+    <div class="chat-list-header">
+        <div>
+            <p class="eyebrow">Private room</p>
+            <h1>All Chats</h1>
+            <p class="signed-in-as">Signed in as <strong><%= username %></strong></p>
+        </div>
+        <form method="POST" action="/logout">
+            <button type="submit" class="secondary-button">Sign out</button>
+        </form>
+    </div>
+
+    <div class="chat-toolbar">
+        <form method="GET" action="/data" class="search-form">
+            <label class="sr-only" for="chat-search">Search your chats</label>
+            <input id="chat-search" type="search" name="q" value="<%= search %>" placeholder="Search people or messages...">
+            <button type="submit">Search</button>
+            <% if (search) { %>
+                <a href="/data" class="clear-search">Clear</a>
+            <% } %>
+        </form>
+        <div class="chat-stats"><strong><%= totalChats %></strong> <%= totalChats === 1 ? "chat" : "chats" %></div>
+    </div>
+
+        <div class="chat-list-actions">
+            <p class="results-label"><%= search ? "Search results" : "Your conversations" %></p>
+            <form method="GET" action="/chats/new">
+                <button>New Chat <span aria-hidden="true">+</span></button>
+            </form>
+        </div>
+
+        <div class="chat-grid">
+    <% for(let chat of c) { %>
+
+        <div class="chat">
+
+            <div class="chat-head">
+                <div class="avatar"><%= chat.from.slice(0, 1).toUpperCase() %></div>
+                <div>
+                    <p class="from"><%= chat.from %></p>
+                    <p class="to">To <strong><%= chat.to %></strong></p>
+                </div>
+                <p class="date"><%= chat.created_at.toLocaleDateString() %></p>
+            </div>
+
+            <div class="msg">
+                <p><%= chat.msg %></p>
+            </div>
+
+            <div class="chat-actions">
+                <form method="GET" action="/chats/<%= chat._id %>/edit">
+                    <button type="submit" class="chat-action">Edit message</button>
+                </form>
+                <form method="POST" action="/chats/<%= chat._id %>?_method=DELETE">
+                    <button type="submit" class="chat-action danger-action">Delete</button>
+                </form>
+            </div>
+
+        </div>
+
+    <% } %>
+        </div>
+
+    <% if (c.length === 0) { %>
+        <div class="empty-state">
+            <% if (search) { %>
+                <h2>No matches found.</h2>
+                <p>Try another name or phrase.</p>
+            <% } else { %>
+                <h2>Your room is quiet.</h2>
+                <p>Create your first private chat to get started.</p>
+            <% } %>
+        </div>
+    <% } %>
+    </main>
+
+</body>
+</html>

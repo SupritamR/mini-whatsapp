@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Chat</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <main class="page-shell">
+        <section class="form-card">
+            <p class="eyebrow">Compose</p>
+            <h3>Write New Chat</h3>
+            <p class="form-subtitle">Send a clean, quick message with the same look and feel as the rest of the app.</p>
+
+            <form action="/data" method="POST" class="chat-form">
+
+                <label class="field">
+                    <span>From</span>
+                    <input
+                        type="text"
+                        name="from"
+                        placeholder="Who are you?"
+                        required
+                    >
+                </label>
+
+                <label class="field">
+                    <span>Message</span>
+                    <textarea
+                        name="msg"
+                        rows="6"
+                        placeholder="Write your message here..."
+                        required
+                    ></textarea>
+                </label>
+
+                <label class="field">
+                    <span>To</span>
+                    <input
+                        type="text"
+                        name="to"
+                        placeholder="Add receiver"
+                        required
+                    >
+                </label>
+
+                <div class="form-actions">
+                    <a class="secondary-link" href="/data">Back to chats</a>
+                    <button type="submit">Create Chat</button>
+                </div>
+
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>

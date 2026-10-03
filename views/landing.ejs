@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pingroom | Simple conversations</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="landing-page">
+    <main class="landing-shell">
+        <nav class="landing-nav" aria-label="Primary navigation">
+            <a class="brand-mark" href="/">Pingroom<span>.</span></a>
+            <a class="nav-link" href="#login">Sign in <span aria-hidden="true">&#8594;</span></a>
+        </nav>
+
+        <section class="landing-hero">
+            <div class="hero-copy">
+                <p class="eyebrow">A quieter place to talk</p>
+                <h1>Messages that feel <em>close.</em></h1>
+                <p class="hero-subtitle">Keep small conversations clear, personal, and easy to return to. Pingroom gives every message a little more room to breathe.</p>
+                <div class="auth-panel" id="login">
+                    <p class="auth-title">Sign in to your room</p>
+                    <% if (authError) { %>
+                        <p class="auth-error"><%= authError %></p>
+                    <% } %>
+                    <div class="login-options">
+                        <form action="/login" method="POST" class="auth-form">
+                        <input type="text" name="username" placeholder="Username" autocomplete="username" required>
+                        <input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
+                        <button type="submit">Sign in <span aria-hidden="true">&#8594;</span></button>
+                        </form>
+                        <div class="or-divider"><span>or use a one-time code</span></div>
+                        <form action="/otp/request" method="POST" class="otp-login-form">
+                            <div class="otp-channel-toggle">
+                                <label><input type="radio" name="channel" value="email" checked> Gmail</label>
+                                <label><input type="radio" name="channel" value="phone"> Mobile</label>
+                            </div>
+                            <div class="otp-request-row">
+                                <input type="text" name="identifier" placeholder="Gmail address or mobile number" required>
+                                <button type="submit">Send code</button>
+                            </div>
+                        </form>
+                    </div>
+                    <p class="auth-switch">New here? <a href="#create-account">Create an account</a></p>
+                </div>
+            </div>
+
+            <div class="hero-note" aria-label="Pingroom message preview">
+                <div class="note-topline">
+                    <span class="status-dot"></span>
+                    <span>Just between us</span>
+                    <span class="note-time">09:41</span>
+                </div>
+                <p class="note-message">“The best ideas usually arrive when there is enough space for them.”</p>
+                <div class="note-footer">
+                    <span>From Maya</span>
+                    <span>To Alex</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-row" aria-label="Pingroom features">
+            <article class="feature-item">
+                <span class="feature-number">01</span>
+                <div>
+                    <h2>Write freely</h2>
+                    <p>Capture the thought before it gets away.</p>
+                </div>
+            </article>
+            <article class="feature-item">
+                <span class="feature-number">02</span>
+                <div>
+                    <h2>Keep context</h2>
+                    <p>Every note remembers who it was for.</p>
+                </div>
+            </article>
+            <article class="feature-item">
+                <span class="feature-number">03</span>
+                <div>
+                    <h2>Stay lightweight</h2>
+                    <p>No noise, no clutter, just the message.</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="register-strip" id="create-account">
+            <div>
+                <p class="eyebrow">Your private room</p>
+                <h2>Make space for your conversations.</h2>
+            </div>
+            <form action="/register" method="POST" class="register-form">
+                <input type="text" name="username" placeholder="Choose a username" autocomplete="username" required>
+                <input type="password" name="password" placeholder="Password, 6+ characters" autocomplete="new-password" minlength="6" required>
+                <input type="email" name="email" placeholder="Gmail address">
+                <input type="tel" name="phone" placeholder="Mobile number">
+                <button type="submit">Create account</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

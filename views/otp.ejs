@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify code | Pingroom</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="landing-page">
+    <main class="otp-shell">
+        <a class="brand-mark" href="/">Pingroom<span>.</span></a>
+        <section class="otp-card">
+            <p class="eyebrow">One more step</p>
+            <h1>Enter your code.</h1>
+            <p class="hero-subtitle">We sent a 6-digit code to your <%= channel === "email" ? "email address" : "mobile number" %>. It expires in 10 minutes.</p>
+            <% if (authError) { %>
+                <p class="auth-error"><%= authError %></p>
+            <% } %>
+            <form action="/otp/verify" method="POST" class="otp-form">
+                <label class="sr-only" for="otp-code">One-time password</label>
+                <input id="otp-code" type="text" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="000000" autocomplete="one-time-code" required>
+                <button type="submit">Verify and continue <span aria-hidden="true">&#8594;</span></button>
+            </form>
+            <a class="text-action" href="/">Use another login method</a>
+        </section>
+    </main>
+</body>
+</html>
